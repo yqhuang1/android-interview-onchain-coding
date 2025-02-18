@@ -1,27 +1,45 @@
 package com.coolger.baseapp.android_interview_onchain_coding.ui
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.coolger.baseapp.android_interview_onchain_coding.R
 import com.coolger.baseapp.android_interview_onchain_coding.data.model.WalletBalance
 
-class WalletAdapter : ListAdapter<WalletBalance, WalletViewHolder>(DiffCallback) {
+class WalletAdapter : RecyclerView.Adapter<WalletAdapter.WalletViewHolder>() {
+
+    private var walletItems: List<WalletBalance> = emptyList()
+
+    fun submitList(newList: List<WalletBalance>) {
+        Log.d("WalletAdapter", "Submitting list with size: ${newList.size}")
+        walletItems = newList
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WalletViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        return WalletViewHolder(inflater.inflate(R.layout.item_wallet, parent, false))
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_wallet, parent, false)
+        return WalletViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: WalletViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        val item = walletItems[position]
+        holder.bind(item)
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<WalletBalance>() {
-        override fun areItemsTheSame(oldItem: WalletBalance, newItem: WalletBalance) =
-            oldItem.currency == newItem.currency
+    override fun getItemCount(): Int = walletItems.size
 
-        override fun areContentsTheSame(oldItem: WalletBalance, newItem: WalletBalance) =
-            oldItem == newItem
+    inner class WalletViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val currencyNameTextView: TextView = itemView.findViewById(R.id.currencyName)
+        private val amountTextView: TextView = itemView.findViewById(R.id.amount)
+        private val usdValueTextView: TextView = itemView.findViewById(R.id.usdValue)
+
+        fun bind(item: WalletBalance) {
+            currencyNameTextView.text = item.currency
+            amountTextView.text = item.amount.toString()
+            usdValueTextView.text = "$ " + "%.2f".format(item.usdValue.toString())
+        }
     }
 }

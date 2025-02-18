@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">android-interview-onchain-coding</string>
+    <string name="name_bat">Basic Attention Token</string>
+    <string name="name_eth">Ethereum</string>
+    <string name="name_usdt">Tether</string>
+    <string name="name_btc">Bitcoin</string>
+    <string name="name_crd">Crypto.com Coin</string>
+    <string name="name_mco">MCO</string>
 </resources>
