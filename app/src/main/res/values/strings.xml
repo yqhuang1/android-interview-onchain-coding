@@ -4,6 +4,6 @@
     <string name="name_eth">Ethereum</string>
     <string name="name_usdt">Tether</string>
     <string name="name_btc">Bitcoin</string>
-    <string name="name_crd">Crypto.com Coin</string>
+    <string name="name_cro">Crypto.com Coin</string>
     <string name="name_mco">MCO</string>
 </resources>

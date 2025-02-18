@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             }
         })[WalletViewModel::class.java]
 
-        walletAdapter = WalletAdapter()
+        walletAdapter = WalletAdapter(this)
         findViewById<RecyclerView>(R.id.recyclerView).apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             adapter = walletAdapter
