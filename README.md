@@ -5,16 +5,9 @@ This is a coding test for Android candidates for Crypto.com Shenzhen Team. This 
 
 Before proceeding to the section of your choice, please consider the following tips.
 
-## General Advice and Tips
-
-- Error scenarios，e.g. edge case/conner case, should be taken into consideration, even if you don't explicitly handle them.
-- Although UI and UX are important, we are more concerned in this demo with your thought process and with how you architect your application. Your demo should take into consideration features that might be added in the future.
-- Clean the file project structure and remove any unused methods. This shows attention to detail.
-- Be opinionated regarding any architecture you use and take your time to make it a reflection of your thought process.
-
 ## The project
 
-You will implement a simple Wallet Dashboard.
+Implement a simple Wallet Dashboard.
 
 - The Wallet app should support the following currencies: BTC, ETH, and CRO.
 - Data Source: three JSON are provided as data sources
@@ -33,3 +26,4 @@ The following requirements should be met:
 - You should finish this in 3 days.
 
 ### Thanks for your time!
+![Screenshot_20250218_193129](https://github.com/user-attachments/assets/57a8ce87-3327-47e6-980f-242aadee4155)
