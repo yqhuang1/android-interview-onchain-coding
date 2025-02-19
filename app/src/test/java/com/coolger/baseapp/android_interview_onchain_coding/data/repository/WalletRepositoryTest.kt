@@ -10,8 +10,6 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import java.io.InputStream
-import java.io.InputStreamReader
 
 class WalletRepositoryTest {
 
@@ -33,7 +31,7 @@ class WalletRepositoryTest {
     @Test
     fun testGetCurrencies() = runBlocking {
         val mockJson = """
-            {
+        {
                 "currencies": [
                     {
                         "code": "BTC",
@@ -54,12 +52,10 @@ class WalletRepositoryTest {
                 "total": 3,
                 "ok": true
             }
-        """.trimIndent()
+    """.trimIndent()
 
-        // 为每个测试创建新的InputStream模拟实例
-        val mockInputStream = Mockito.mock(InputStream::class.java)
-        Mockito.`when`(mockAssetManager.open("supported_currencies.json")).thenReturn(mockInputStream)
-        Mockito.`when`(mockInputStream.reader()).thenReturn(InputStreamReader(mockJson.byteInputStream()))
+        val inputStream = mockJson.byteInputStream()
+        Mockito.`when`(mockAssetManager.open("supported_currencies.json")).thenReturn(inputStream)
 
         val currencies = walletRepository.getCurrencies().first()
         assertEquals(3, currencies.size)
@@ -68,7 +64,7 @@ class WalletRepositoryTest {
     @Test
     fun testGetExchangeRates() = runBlocking {
         val mockJson = """
-            {
+         {
                 "ok": true,
                 "tiers": [
                     {
@@ -103,12 +99,11 @@ class WalletRepositoryTest {
                     }
                 ]
             }
-        """.trimIndent()
+    """.trimIndent()
 
-        // 使用新的mockInputStream实例
-        val mockInputStream = Mockito.mock(InputStream::class.java)
-        Mockito.`when`(mockAssetManager.open("exchange_rates.json")).thenReturn(mockInputStream)
-        Mockito.`when`(mockInputStream.reader()).thenReturn(InputStreamReader(mockJson.byteInputStream()))
+        // 使用真实的InputStream而不是Mock
+        val inputStream = mockJson.byteInputStream()
+        Mockito.`when`(mockAssetManager.open("exchange_rates.json")).thenReturn(inputStream)
 
         val exchangeRates = walletRepository.getExchangeRates().first()
         assertEquals(3, exchangeRates.size)
@@ -117,7 +112,7 @@ class WalletRepositoryTest {
     @Test
     fun testGetBalances() = runBlocking {
         val mockJson = """
-            {
+        {
                 "ok": true,
                 "wallet": [
                     {
@@ -134,12 +129,10 @@ class WalletRepositoryTest {
                     }
                 ]
             }
-        """.trimIndent()
+    """.trimIndent()
 
-        // 使用新的mockInputStream实例
-        val mockInputStream = Mockito.mock(InputStream::class.java)
-        Mockito.`when`(mockAssetManager.open("wallet_balances.json")).thenReturn(mockInputStream)
-        Mockito.`when`(mockInputStream.reader()).thenReturn(InputStreamReader(mockJson.byteInputStream()))
+        val inputStream = mockJson.byteInputStream()
+        Mockito.`when`(mockAssetManager.open("wallet_balances.json")).thenReturn(inputStream)
 
         val balances = walletRepository.getBalances().first()
         assertEquals(3, balances.size)
